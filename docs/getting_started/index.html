@@ -55,52 +55,54 @@
               }
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Getting Started</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="a-brief-history-of-cmt-course-management-tools"></a><a href="#a-brief-history-of-cmt-course-management-tools" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A brief history of CMT (Course Management Tools)</h2>
-<p>When I joined Lightbend in 2016, I started working on the Lightbend Training Courses. At that
-time the code for the exercises in each course were maintained in a <strong><em>git</em></strong> repository so that
-courses could be versioned. The problem however was that each exercise in a course was mapped
-to a commit in git. So, in a course with say, 15 exercises, the <strong><em>git</em></strong> repository would
-have 15 commits. That was very nice in principle, but it made it very difficult from a
-maintenance point of view: as soon as one updated an exercise, the only way to do this was
-to use <strong><em>git</em></strong> interactive rebasing. Doing so rewrites the history of the exercise repository
-which is pretty bad because:</p>
+<p>Soon after joining Lightbend in 2016, I started working on training course
+development and maintenance. For versioning purposes, the code for the exercises in
+each course was maintained in a <strong><em>git</em></strong> repository in which each exercise was mapped
+to a commit. So, in a course with say, 15 exercises, the
+<strong><em>git</em></strong> repository would have 15 commits. That was very nice in principle, but it made it very difficult from a maintenance point of
+view: updating of exercises was done via <strong><em>git</em></strong> interactive rebasing. Doing so
+rewrites the history of the exercise repository which is pretty bad because:</p>
 <ul>
-<li>if one wants to keep track of previous versions of a course, the best one can do is to save
+<li>when tracking previous versions of a course, the best one can do is to save
 that version in a separate branch</li>
-<li>if people did a Pull Request (PR) on a particular version of the course, the interactive rebasing
-editing approach renders the PR useless</li>
+<li>If there were any open Pull Requests on the course, the interactive rebasing
+process will render these pretty much useless</li>
 </ul>
-<p>Duncan Devore, one of my Lightbend colleagues at that time had already made a few attempts at
-coming up with a more flexible approach. I picked up the thread and implemented a system that
-became the Course Management Tools. The main goals I set out to achieve were:</p>
+<p>One of my Lightbend colleagues at that time had already made a few attempts at
+coming up with a more flexible approach. I picked up the thread and implemented a
+system that became the Course Management Tools (CMT). The main goals I set out to
+achieve were:</p>
 <ul>
-<li>put all course exercises in a <strong><em>git</em></strong> repository, the so-called <em>Main Repository</em> (<em>MR</em>), that
-allows versioning of the exercises <em>without being forced</em> to use interactive rebasing
-when editing exercises</li>
-<li>create a tool to derive an artifact from the <em>MR</em> that is optimised for student usage:
+<li><p>put all course exercises in a <strong><em>git</em></strong> repository, the so-called <em>CMT Main
+Repository</em> (<em>CMT MR</em>), that allows versioning of the exercises without being
+<em>forced</em> to use interactive rebasing when editing exercises. Also, open
+Pull Requests are preserved when making changes to the exercises</p></li>
+<li><p>create a tool to derive an artifact from the <em>CMT MR</em> that is optimised for
+student usage:</p>
 <ul>
 <li>self-contained (i.e. not a git repository)</li>
 <li>embedded exercise instructions</li>
 <li>navigation of the exercises and automatically pull in tests</li>
-<li>allow the student to
+<li>allow the student to:
 <ul>
 <li>&quot;pull&quot; the reference solution for an exercise</li>
 <li>save the current state of an exercise</li>
 <li>restore a previously saved state of an exercise</li>
 </ul></li>
 </ul></li>
-<li>create a tool that allows a course creator or maintainer to change exercises using <strong><em>git</em></strong>
-interactive rebasing when this makes sense</li>
+<li><p>create a tool that allows a course creator or maintainer to change exercises using <strong><em>git</em></strong>
+interactive rebasing when this makes sense</p></li>
 </ul>
 <p>Over time, practical experience showed that there are other very useful use cases for the tooling.
-That's what is described in the following section</p>
+That's what is described in the following section.</p>
 <h2><a class="anchor" aria-hidden="true" id="why-cmt"></a><a href="#why-cmt" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why CMT?</h2>
 <p>What do the following have in common?</p>
 <ul>
 <li><em>Build and maintain a series of exercises for a training course</em>:
 <ul>
 <li>where each exercise builds on the previous one</li>
-<li>the exercise history is tracked using <strong><em>git</em></strong></li>
-<li>the exercises can be converted in a artifact that gives students the
+<li>the exercises history is tracked using <strong><em>git</em></strong></li>
+<li>the exercises can be converted into an artifact that gives students the
 possibility to navigate the exercises, save the current state of
 their work for each exercise, and, if needed, <em>pull</em> the solution
 for an exercise</li>
@@ -111,7 +113,7 @@ for an exercise</li>
 are not yet comfortable with the used software libraries and/or
 frameworks</li>
 <li>the application history is tracked using <strong><em>git</em></strong></li>
-<li>the application can be converted in an artifact that can be used
+<li>the application can be converted to artifact that can be used
 to run the application at any of the intermediate steps in an
 easy manner</li>
 <li>the application can be converted in an artifact that can be used
@@ -121,7 +123,8 @@ to inspect the code changes between consecutive steps</li>
 <ul>
 <li>maintain a series of &quot;checkpoints&quot;</li>
 <li>track the checkpoint history in <strong><em>git</em></strong></li>
-<li>provide for a safetynet by allowing to revert to a checkpoint</li>
+<li>provide for a safetynet by giving a user the option to revert to a
+checkpoint that is known to <em>&quot;work&quot;</em></li>
 <li>save any changes made during the session for later retrieval</li>
 </ul></li>
 </ul>
@@ -133,7 +136,7 @@ following commands:</p>
 <ul>
 <li><p><strong>cmt-mainadm</strong>: as the name suggest, this command is used for administration
 purposes, such as renumbering exercises, generating the root <code>build.sbt</code>
-build definition file</p></li>
+build definition file, generate CMT test scripts, ...</p></li>
 <li><p><strong>cmt-studentify</strong>: this command is used to generate an artifact that is suited
 for different purposes:</p>
 <ul>
@@ -148,9 +151,9 @@ for different purposes:</p>
 <li>print the list of exercises and mark the current exercise</li>
 </ul></li>
 <li>in live coding sessions, the exact same features used in a learning
-context allow one to
+context allow one to:
 <ul>
-<li>quickly restore the code to for any checkpoint by pulling the solution
+<li>quickly restore the code for a checkpoint by pulling the solution
 for it</li>
 <li>save the current state of a modified checkpoint for later retrieval</li>
 </ul></li>
@@ -165,8 +168,10 @@ changes in the <em>linearized</em> repository in the main exercise repository.</
 discarded after the editing process is finished. However, it can used to inspect
 the differences between consecutive exercises (this is because the linearized repo
 is a <strong><em>git</em></strong> repository where each exercise is a commit).</p>
-<p>The following picture shows the different respositories and flows in the management of a course.</p>
+<p>The following picture shows the different respositories and flows in the management
+of a course:</p>
 <p><img src="https://i.imgur.com/5FzwpLa.png" alt="CMT overview"></p>
-<p>It is the <em>Main Repository</em> that contains the history of a course (or demo/POC) repository.
-The <em>Main Repository</em> is multi-project sbt build with one project per exercise.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/course-management-tools/docs/workflows"><span>Workflows</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#a-brief-history-of-cmt-course-management-tools">A brief history of CMT (Course Management Tools)</a></li><li><a href="#why-cmt">Why CMT?</a></li><li><a href="#overview">Overview</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/course-management-tools/" class="nav-home"><img src="/course-management-tools/img/favicon.ico" alt="Course Management Tools" width="66" height="58"/></a><div><h5>Docs</h5><a href="/course-management-tools/docs/getting_started">Getting Started</a><a href="/course-management-tools/docs/reference-intro">Reference</a></div><div><h5>Community</h5><a href="https://github.com/eloots/course-management-tools/issues" target="_blank">Open an issue or ask questions</a></div><div><h5>More</h5><a href="/course-management-tools/blog">Blog</a><a href="https://github.com/eloots/course-management-tools" target="_blank">GitHub</a><a class="github-button" href="https://github.com/eloots/course-management-tools" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div><div><img style="float:left;margin:5px" src="/course-management-tools/img/jetbrains.svg" alt="Course Management Tools" width="66" height="58"/><div><a href="https://www.jetbrains.com/?from=course-management-tools" target="_blank">JetBrains supports this project by providing core project contributors with a set of best-in-class developer tools free of charge.</a></div></div></section><section class="copyright">Copyright © 2020 Course Management Tools</section></footer></div></body></html>
+<p>It is the <em>CMT Main Repository</em> that contains the complete history of a course (or
+demo/POC) repository.</p>
+<p>The <em>CMT Main Repository</em> is multi-project sbt build with one project per exercise.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/course-management-tools/docs/workflows"><span>Workflows</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#a-brief-history-of-cmt-course-management-tools">A brief history of CMT (Course Management Tools)</a></li><li><a href="#why-cmt">Why CMT?</a></li><li><a href="#overview">Overview</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/course-management-tools/" class="nav-home"><img src="/course-management-tools/img/favicon.ico" alt="Course Management Tools" width="66" height="58"/></a><div><h5>Docs</h5><a href="/course-management-tools/docs/install">Getting Started</a><a href="/course-management-tools/docs/reference-intro">Reference</a></div><div><h5>Community</h5><a href="https://github.com/eloots/course-management-tools/issues" target="_blank">Open an issue or ask questions</a></div><div><h5>More</h5><a href="/course-management-tools/blog">Blog</a><a href="https://github.com/eloots/course-management-tools" target="_blank">GitHub</a><a class="github-button" href="https://github.com/eloots/course-management-tools" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div><div><img style="float:left;margin:5px" src="/course-management-tools/img/jetbrains.svg" alt="Course Management Tools" width="66" height="58"/><div><a href="https://www.jetbrains.com/?from=course-management-tools" target="_blank">JetBrains supports this project by providing core project contributors with a set of best-in-class developer tools free of charge.</a></div></div></section><section class="copyright">Copyright © 2020 Course Management Tools</section></footer></div></body></html>

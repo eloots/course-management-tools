@@ -68,7 +68,8 @@
                            <span class="hljs-built_in">name</span> <span class="hljs-keyword">of</span> initial exercise <span class="hljs-keyword">on</span> start
   -cfg, <span class="hljs-comment">--config-file &lt;value&gt;</span>
                            configuration <span class="hljs-built_in">file</span>
-  -g, <span class="hljs-comment">--git                initialise studentified repository as a git repository</span>
+  -g, <span class="hljs-comment">--git                initialise studentified repository as a git</span>
+                           repository
   -dot, <span class="hljs-comment">--dotty            studentified repository is a Dotty project</span>
   -nar, <span class="hljs-comment">--no-auto-reload-sbt</span>
                            no automatic reload <span class="hljs-keyword">on</span> build definition change
@@ -84,10 +85,19 @@ of <code>cmt-studentify</code>:</p>
 <pre><code class="hljs">cmt-studentify <span class="hljs-regexp">/Users/</span>ericloots<span class="hljs-regexp">/Trainingen/</span>LBT/lunatech-scala<span class="hljs-number">-2</span>-to-scala3-course \
                <span class="hljs-regexp">/Users/</span>ericloots<span class="hljs-regexp">/tmp/</span>stu
 </code></pre>
-<p>After a successful completion of this command, the <em>studentified</em> repo will be
-in a subfolder of <code>/Users/ericloots/tmp/stu</code> named <code>lunatech-scala-2-to-scala3-course</code>.</p>
+<p><br></p>
+<blockquote>
+<p>NOTE: <code>cmt-studentify</code> requires your working directory to have
+no unstaged files and your staging area to be clean. If this is not the case, you
+will see the following error message:</p>
+<p><code>YOU HAVE UNCOMMITTED CHANGES IN YOUR GIT INDEX. COMMIT CHANGES AND RE-RUN THE COMMAND</code></p>
+<p>As the error message suggest commit all changes and re-run the command.</p>
+</blockquote>
+<p>After a successful completion of this command, the <em>studentified</em> repository
+will be in subfolder <code>lunatech-scala-2-to-scala3-course</code> of folder
+<code>/Users/ericloots/tmp/stu</code>.</p>
 <p>The process of <em>studentifying</em> a main repository can be customised in a
-number of ways either by passing some options when invoking <em>studentify</em>
+number of ways either by passing some options when invoking <code>cmt-studentify</code>
 or via configuration.</p>
 <p>The following sections cover the customisation via command-line options.</p>
 <p>For the sake of demonstration, the examples shown below work on a CMT main
@@ -98,23 +108,25 @@ repository with the following exercises:</p>
 <code>Version.scalaVersion</code> variable in your build definition. If this is not
 the case, you will set the sbt build's <code>scalaVersion</code> settings elsewhere.</p>
 <h3><a class="anchor" aria-hidden="true" id="-nar-do-not-automatically-reload-the-build-on-build-changes"></a><a href="#-nar-do-not-automatically-reload-the-build-on-build-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>-nar</code>: Do not automatically reload the build on build changes</h3>
-<p>This option allows one to overrule the default behavior which is to
+<p>This option is used to overrule the default behavior which is to
 automatically reload the build when a change in the build definition
 is detected by sbt.</p>
 <h3><a class="anchor" aria-hidden="true" id="selecting-a-range-of-exercises-to-_studentify_"></a><a href="#selecting-a-range-of-exercises-to-_studentify_" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Selecting a range of exercises to <em>studentify</em></h3>
 <p>In some cases, it can be handy to select a subset of the available exercises
-in a CMT main repository to <em>studentify</em>. For example, one might have
-multiple implementations of a series of exercises (e.g. using different
-libraries) in the main repo and depending on the scenario, one may wish to
-only export one of these.</p>
-<p>The <code>-fe</code> and <code>-le</code> options allow to do just that. Here's example that will
-export all exercises between exercises number 5 and 10 from a main repo:</p>
+in a CMT main repository to <em>studentify</em>.</p>
+<p>For example, the CMT main repository may have alternative implementations of
+a series of exercises (e.g. using different libraries or programming languages)
+in the CMT main repository and depending on the scenario, one may wish to only
+export an exercise series for one specific alternative.</p>
+<p>The <code>-fe</code> and <code>-le</code> options allow to do just that. Here's an example that will
+export all exercises between exercises number 5 and 10 from a CMT main
+repository:</p>
 <pre><code class="hljs">cmt-studentify -fe exercise_005_extension_methods   \
                -le exercise_010_opaque_type_aliases \
                <span class="hljs-regexp">/Users/ericloots</span><span class="hljs-regexp">/Trainingen/</span>LBT/lunatech-scala-<span class="hljs-number">2</span>-to-scala3-course \
                <span class="hljs-regexp">/Users/ericloots</span><span class="hljs-regexp">/tmp/stu</span>
 </code></pre>
-<p>Starting an sbt session in the <em>studentified</em> repo shows the result:</p>
+<p>Starting an sbt session in the <em>studentified</em> repository shows the result:</p>
 <pre><code class="hljs">$ cd /Users/ericloots/tmp/stu/lunatech-scala<span class="hljs-number">-2</span>-to-scala3-course
 
 $ $ sbt
@@ -142,8 +154,8 @@ via the <code>-sfe</code> option as shown here:</p>
                /Users/ericloots/Trainingen/LBT/lunatech-scala-<span class="hljs-number">2</span>-<span class="hljs-keyword">to</span>-scala3-course <span class="hljs-string">\</span>
                /Users/ericloots/tmp/stu
 </code></pre>
-<p>Starting an sbt session in the <em>studentified</em> repo shows the result and confirms
-that the current position is indeed at <code>exercise_008_enum_and_export</code>:</p>
+<p>Starting an sbt session in the <em>studentified</em> repository shows the result and
+confirms that the current position is indeed at <code>exercise_008_enum_and_export</code>:</p>
 <pre><code class="hljs">$ cd /Users/ericloots/tmp/stu/lunatech-scala<span class="hljs-number">-2</span>-to-scala3-course
 
 $ sbt
@@ -160,11 +172,13 @@ man [e] &gt; Scala <span class="hljs-number">2</span> to Scala <span class="hljs
   <span class="hljs-number">6.</span>   exercise_010_opaque_type_aliases
 man [e] &gt; Scala <span class="hljs-number">2</span> to Scala <span class="hljs-number">3</span> &gt; <span class="hljs-keyword">enum</span> <span class="hljs-keyword">and</span> export &gt;
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="unitialise-a-_studentified_-repo-as-a-_git_-repository"></a><a href="#unitialise-a-_studentified_-repo-as-a-_git_-repository" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Unitialise a <em>studentified</em> repo as a <strong><em>git</em></strong> repository</h3>
-<p>The <code>-g</code> option will <em>studentify</em> a CMT main repository and initialise that repo as a <strong><em>git</em></strong>
-repository with a single commit.</p>
-<p>Here's a sample run and the output of <code>git status</code> on the <em>studentified</em> repo:</p>
-<pre><code class="hljs">$ cmt-studentify -g <span class="hljs-regexp">/Users/</span>ericloots<span class="hljs-regexp">/Trainingen/</span>LBT/lunatech-scala<span class="hljs-number">-2</span>-to-scala3-course \
+<h3><a class="anchor" aria-hidden="true" id="initialise-a-_studentified_-repository-as-a-_git_-repository"></a><a href="#initialise-a-_studentified_-repository-as-a-_git_-repository" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Initialise a <em>studentified</em> repository as a <strong><em>git</em></strong> repository</h3>
+<p>The <code>-g</code> option will <em>studentify</em> a CMT main repository and initialise it as a
+<strong><em>git</em></strong> repository with a single commit.</p>
+<p>Here's a sample run and the output of <code>git status</code> on the <em>studentified</em>
+repository:</p>
+<pre><code class="hljs">$ cmt-studentify -g \
+                 <span class="hljs-regexp">/Users/</span>ericloots<span class="hljs-regexp">/Trainingen/</span>LBT/lunatech-scala<span class="hljs-number">-2</span>-to-scala3-course \
                  <span class="hljs-regexp">/Users/</span>ericloots<span class="hljs-regexp">/tmp/</span>stu
 &lt;elided&gt;
 
@@ -192,4 +206,4 @@ illustrated in the following diagram:</p>
 <li><a href="/course-management-tools/docs/reference-config#common-project-enabled">common-project-enabled</a></li>
 <li><a href="/course-management-tools/docs/reference-config#use-configure-for-projects">use-configure-for-projects</a></li>
 </ul>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/course-management-tools/docs/reference-mainadm"><span class="arrow-prev">← </span><span>cmt-mainadm</span></a><a class="docs-next button" href="/course-management-tools/docs/reference-linearize"><span>cmt-linearize</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#command-invocation">Command Invocation</a></li><li><a href="#_studentifying_-a-cmt-main-repository"><em>Studentifying</em> a CMT main repository</a><ul class="toc-headings"><li><a href="#-dot-dotty-compatible-build-definition"><code>-dot</code>: Dotty compatible build definition</a></li><li><a href="#-nar-do-not-automatically-reload-the-build-on-build-changes"><code>-nar</code>: Do not automatically reload the build on build changes</a></li><li><a href="#selecting-a-range-of-exercises-to-_studentify_">Selecting a range of exercises to <em>studentify</em></a></li><li><a href="#changing-the-default-initial-exercise">Changing the default initial exercise</a></li><li><a href="#unitialise-a-_studentified_-repo-as-a-_git_-repository">Unitialise a <em>studentified</em> repo as a <strong><em>git</em></strong> repository</a></li><li><a href="#the-sbt-build-definition-of-a-_studentified_-cmt-main-repository">The sbt build definition of a <em>studentified</em> CMT main repository</a></li><li><a href="#cmt-studentify-configuration-settings"><code>cmt-studentify</code> configuration settings</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/course-management-tools/" class="nav-home"><img src="/course-management-tools/img/favicon.ico" alt="Course Management Tools" width="66" height="58"/></a><div><h5>Docs</h5><a href="/course-management-tools/docs/getting_started">Getting Started</a><a href="/course-management-tools/docs/reference-intro">Reference</a></div><div><h5>Community</h5><a href="https://github.com/eloots/course-management-tools/issues" target="_blank">Open an issue or ask questions</a></div><div><h5>More</h5><a href="/course-management-tools/blog">Blog</a><a href="https://github.com/eloots/course-management-tools" target="_blank">GitHub</a><a class="github-button" href="https://github.com/eloots/course-management-tools" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div><div><img style="float:left;margin:5px" src="/course-management-tools/img/jetbrains.svg" alt="Course Management Tools" width="66" height="58"/><div><a href="https://www.jetbrains.com/?from=course-management-tools" target="_blank">JetBrains supports this project by providing core project contributors with a set of best-in-class developer tools free of charge.</a></div></div></section><section class="copyright">Copyright © 2020 Course Management Tools</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/course-management-tools/docs/reference-mainadm"><span class="arrow-prev">← </span><span>cmt-mainadm</span></a><a class="docs-next button" href="/course-management-tools/docs/reference-linearize"><span>cmt-linearize</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#command-invocation">Command Invocation</a></li><li><a href="#_studentifying_-a-cmt-main-repository"><em>Studentifying</em> a CMT main repository</a><ul class="toc-headings"><li><a href="#-dot-dotty-compatible-build-definition"><code>-dot</code>: Dotty compatible build definition</a></li><li><a href="#-nar-do-not-automatically-reload-the-build-on-build-changes"><code>-nar</code>: Do not automatically reload the build on build changes</a></li><li><a href="#selecting-a-range-of-exercises-to-_studentify_">Selecting a range of exercises to <em>studentify</em></a></li><li><a href="#changing-the-default-initial-exercise">Changing the default initial exercise</a></li><li><a href="#initialise-a-_studentified_-repository-as-a-_git_-repository">Initialise a <em>studentified</em> repository as a <strong><em>git</em></strong> repository</a></li><li><a href="#the-sbt-build-definition-of-a-_studentified_-cmt-main-repository">The sbt build definition of a <em>studentified</em> CMT main repository</a></li><li><a href="#cmt-studentify-configuration-settings"><code>cmt-studentify</code> configuration settings</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/course-management-tools/" class="nav-home"><img src="/course-management-tools/img/favicon.ico" alt="Course Management Tools" width="66" height="58"/></a><div><h5>Docs</h5><a href="/course-management-tools/docs/install">Getting Started</a><a href="/course-management-tools/docs/reference-intro">Reference</a></div><div><h5>Community</h5><a href="https://github.com/eloots/course-management-tools/issues" target="_blank">Open an issue or ask questions</a></div><div><h5>More</h5><a href="/course-management-tools/blog">Blog</a><a href="https://github.com/eloots/course-management-tools" target="_blank">GitHub</a><a class="github-button" href="https://github.com/eloots/course-management-tools" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div><div><img style="float:left;margin:5px" src="/course-management-tools/img/jetbrains.svg" alt="Course Management Tools" width="66" height="58"/><div><a href="https://www.jetbrains.com/?from=course-management-tools" target="_blank">JetBrains supports this project by providing core project contributors with a set of best-in-class developer tools free of charge.</a></div></div></section><section class="copyright">Copyright © 2020 Course Management Tools</section></footer></div></body></html>

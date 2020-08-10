@@ -92,7 +92,7 @@ CMT main repository.</p>
 <code>Version.scalaVersion</code> variable in your build definition. If this is not
 the case, you will set the sbt build's <code>scalaVersion</code> settings elsewhere.</p>
 <h3><a class="anchor" aria-hidden="true" id="-nar-do-not-automatically-reload-the-build-on-build-changes"></a><a href="#-nar-do-not-automatically-reload-the-build-on-build-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>-nar</code>: Do not automatically reload the build on build changes</h3>
-<p>This option allows one to overrule the default behavior which is to
+<p>This option is used to overrule the default behavior which is to
 automatically reload the build when a change in the build definition
 is detected by sbt.</p>
 <h2><a class="anchor" aria-hidden="true" id="deleting-an-exercise"></a><a href="#deleting-an-exercise" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deleting an exercise</h2>
@@ -106,22 +106,22 @@ The duplicate will retain the number of the exercise that is duplicated
 while the latter and subsequent exercises to be shifted &quot;down&quot;.</p>
 <pre><code class="hljs">$ cmt-mainadm -dib &lt;n&gt; <span class="hljs-comment">[-cfg config_file]</span> <span class="hljs-comment">[-dot]</span> <span class="hljs-comment">[-nar]</span> &lt;main_repo&gt;
 </code></pre>
-<p>For example, imagine a main repo with a list of exercises with exercise
-numbers increasing by 1. The following table shows the before and after
-when running the <code>cmt-mainadm -dib 3 ...</code> command:</p>
+<p>For example, imagine a CMT main repository with a list of exercises with
+exercise numbers increasing by 1. The following table shows the before
+and after when running the <code>cmt-mainadm -dib 3 ...</code> command:</p>
 <p><img src="https://i.imgur.com/oSp1KXY.png" alt="DIB exercise # 3 - no gap"></p>
 <p>If there is &quot;space&quot; to insert the duplicate, no renumbering will occur as
 the before and after shows when running the <code>cmt-mainadm -dib 6 ...</code> command:</p>
 <p><img src="https://i.imgur.com/CYJafQH.png" alt="DIB exercise # 3 - gap"></p>
 <h2><a class="anchor" aria-hidden="true" id="renumber-exercises-with-a-given-offset-and-step-size"></a><a href="#renumber-exercises-with-a-given-offset-and-step-size" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Renumber exercises with a given offset and step size</h2>
-<p>In some situations, it can be useful to renumber the exercises in a main
+<p>In some situations, it can be useful to renumber the exercises in a CMT main
 repository. Perhaps you want to create a &quot;gap&quot; in which some new exercises
 will be put, or you want to shift all exercises to some offset.</p>
 <p>This can be achieved with the <em>renumber</em> option on <code>cmt-mainadm</code>.</p>
 <p>Here are a couple of examples with a before and after situation.</p>
 <p>Running <code>cmt-mainadm -r -rs 5 -ro 10 ...</code></p>
 <p><img src="https://i.imgur.com/pm7m6f9.png" alt="Renumber with non-default offset and stepsize"></p>
-<p>Running <code>cmt-mainadm -r -rs 7 ...</code></p>
+<p>Running <code>cmt-mainadm -r -rs 11 ...</code></p>
 <p><img src="https://i.imgur.com/URbqTV3.png" alt="Renumber with non-default stepsize"></p>
 <p>Running <code>cmt-mainadm -r -ro 10 ...</code></p>
 <p><img src="https://i.imgur.com/kBAaEaC.png" alt="Renumber with non-default offset"></p>
@@ -149,8 +149,9 @@ that, when executed, will run the following steps:</p>
 </ul></li>
 <li>it <em>linearizes</em> the main repository and it executes the test on the <em>last</em>
 exercise (at the HEAD of the <strong><em>git</em></strong> repo)</li>
-<li>it <em>studentifies</em> the main repository and in this repo it runs through
-<em>all</em> the exercises in a random manner and for each of these exercise it:
+<li>it <em>studentifies</em> the main repository and in this repository, it runs
+through <em>all</em> the exercises in a random manner and for each of these
+exercise it:
 <ul>
 <li>jumps to that exercise</li>
 <li>pulls the solution</li>
@@ -218,10 +219,13 @@ Cloning <span class="hljs-keyword">into</span> <span class="hljs-string">'lunate
 done.
 <span class="hljs-keyword">No</span> issues <span class="hljs-keyword">found</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">main</span> <span class="hljs-keyword">project</span>
 </code></pre>
+<p><br></p>
 <blockquote>
-<p>NOTE: <code>cmt-mainadm</code> requires your working directory to have no unstaged
-files and your staging area to be clean. If that condition is not met,
-resolve it before trying again</p>
+<p>NOTE: For some operations, <code>cmt-mainadm</code> requires your working directory to have
+no unstaged files and your staging area to be clean. If this is not the case, you
+will see the following error message:</p>
+<p><code>YOU HAVE UNCOMMITTED CHANGES IN YOUR GIT INDEX. COMMIT CHANGES AND RE-RUN THE COMMAND</code></p>
+<p>As the error message suggest commit all changes and re-run the command.</p>
 </blockquote>
 <h2><a class="anchor" aria-hidden="true" id="rebuild-the-root-buildsbt-of-a-cmt-main-repository"></a><a href="#rebuild-the-root-buildsbt-of-a-cmt-main-repository" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rebuild the root <code>build.sbt</code> of a CMT main repository</h2>
 <p>Whenever manual changes are made to the exercise names in the main repository,
@@ -237,12 +241,13 @@ case when the name of an exercise is changed (e.g. from, say
 <h2><a class="anchor" aria-hidden="true" id="wrapping-up"></a><a href="#wrapping-up" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Wrapping up</h2>
 <p>It is worthwhile to give an example of specifying a non-default CMT
 configuration file to round up this section. You may have to do this
-in your CMT project is you put the <code>course-management.conf</code> file in a
-non-default location.</p>
+in your CMT project if you put the <code>course-management.conf</code> file in a
+non-default location or when you give it a different name.</p>
 <p>For the example, we use the CMT Github repository itself and we will
 run <code>cmt-mainadm -c</code> on the templates. Here is a sample run:</p>
-<pre><code class="hljs">$ cmt-mainadm -c -cfg course-templates/scala-cmt-template-common/course-management.conf \
-          /Users/ericloots/Trainingen/LBT/course-management-tools
+<pre><code class="hljs">$ cmt-mainadm -c \
+              -cfg course-templates/scala-cmt-template-common/course-management.conf \
+              /Users/ericloots/Trainingen/LBT/course-management-tools
 git version 2.28.0
 On branch documentation
 Your branch is ahead of 'origin/documentation' by 1 commit.
@@ -256,6 +261,5 @@ CHECKING WORKSPACE <span class="hljs-keyword">in</span> /<span class="hljs-keywo
 Cloning <span class="hljs-keyword">into</span> <span class="hljs-string">'course-management-tools'</span>...
 done.
 <span class="hljs-keyword">No</span> issues <span class="hljs-keyword">found</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">main</span> <span class="hljs-keyword">project</span>
-
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/course-management-tools/docs/reference-intro"><span class="arrow-prev">← </span><span>Introduction</span></a><a class="docs-next button" href="/course-management-tools/docs/reference-cmtstudentify"><span>cmt-studentify</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#command-invocation">Command Invocation</a></li><li><a href="#main-administration-tasks">Main administration tasks</a><ul class="toc-headings"><li><a href="#-dot-dotty-compatible-build-definition"><code>-dot</code>: Dotty compatible build definition</a></li><li><a href="#-nar-do-not-automatically-reload-the-build-on-build-changes"><code>-nar</code>: Do not automatically reload the build on build changes</a></li></ul></li><li><a href="#deleting-an-exercise">Deleting an exercise</a></li><li><a href="#duplicate-a-given-exercise-and-insert-it-before-that-exercise">Duplicate a given exercise and insert it before that exercise</a></li><li><a href="#renumber-exercises-with-a-given-offset-and-step-size">Renumber exercises with a given offset and step size</a></li><li><a href="#generation-of-a-repository-test-script">Generation of a repository test script</a></li><li><a href="#checking-the-soundness-of-a-cmt-main-repository">Checking the soundness of a CMT main repository</a></li><li><a href="#rebuild-the-root-buildsbt-of-a-cmt-main-repository">Rebuild the root <code>build.sbt</code> of a CMT main repository</a></li><li><a href="#wrapping-up">Wrapping up</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/course-management-tools/" class="nav-home"><img src="/course-management-tools/img/favicon.ico" alt="Course Management Tools" width="66" height="58"/></a><div><h5>Docs</h5><a href="/course-management-tools/docs/getting_started">Getting Started</a><a href="/course-management-tools/docs/reference-intro">Reference</a></div><div><h5>Community</h5><a href="https://github.com/eloots/course-management-tools/issues" target="_blank">Open an issue or ask questions</a></div><div><h5>More</h5><a href="/course-management-tools/blog">Blog</a><a href="https://github.com/eloots/course-management-tools" target="_blank">GitHub</a><a class="github-button" href="https://github.com/eloots/course-management-tools" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div><div><img style="float:left;margin:5px" src="/course-management-tools/img/jetbrains.svg" alt="Course Management Tools" width="66" height="58"/><div><a href="https://www.jetbrains.com/?from=course-management-tools" target="_blank">JetBrains supports this project by providing core project contributors with a set of best-in-class developer tools free of charge.</a></div></div></section><section class="copyright">Copyright © 2020 Course Management Tools</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/course-management-tools/docs/reference-intro"><span class="arrow-prev">← </span><span>Introduction</span></a><a class="docs-next button" href="/course-management-tools/docs/reference-cmtstudentify"><span>cmt-studentify</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#command-invocation">Command Invocation</a></li><li><a href="#main-administration-tasks">Main administration tasks</a><ul class="toc-headings"><li><a href="#-dot-dotty-compatible-build-definition"><code>-dot</code>: Dotty compatible build definition</a></li><li><a href="#-nar-do-not-automatically-reload-the-build-on-build-changes"><code>-nar</code>: Do not automatically reload the build on build changes</a></li></ul></li><li><a href="#deleting-an-exercise">Deleting an exercise</a></li><li><a href="#duplicate-a-given-exercise-and-insert-it-before-that-exercise">Duplicate a given exercise and insert it before that exercise</a></li><li><a href="#renumber-exercises-with-a-given-offset-and-step-size">Renumber exercises with a given offset and step size</a></li><li><a href="#generation-of-a-repository-test-script">Generation of a repository test script</a></li><li><a href="#checking-the-soundness-of-a-cmt-main-repository">Checking the soundness of a CMT main repository</a></li><li><a href="#rebuild-the-root-buildsbt-of-a-cmt-main-repository">Rebuild the root <code>build.sbt</code> of a CMT main repository</a></li><li><a href="#wrapping-up">Wrapping up</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/course-management-tools/" class="nav-home"><img src="/course-management-tools/img/favicon.ico" alt="Course Management Tools" width="66" height="58"/></a><div><h5>Docs</h5><a href="/course-management-tools/docs/install">Getting Started</a><a href="/course-management-tools/docs/reference-intro">Reference</a></div><div><h5>Community</h5><a href="https://github.com/eloots/course-management-tools/issues" target="_blank">Open an issue or ask questions</a></div><div><h5>More</h5><a href="/course-management-tools/blog">Blog</a><a href="https://github.com/eloots/course-management-tools" target="_blank">GitHub</a><a class="github-button" href="https://github.com/eloots/course-management-tools" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div><div><img style="float:left;margin:5px" src="/course-management-tools/img/jetbrains.svg" alt="Course Management Tools" width="66" height="58"/><div><a href="https://www.jetbrains.com/?from=course-management-tools" target="_blank">JetBrains supports this project by providing core project contributors with a set of best-in-class developer tools free of charge.</a></div></div></section><section class="copyright">Copyright © 2020 Course Management Tools</section></footer></div></body></html>
