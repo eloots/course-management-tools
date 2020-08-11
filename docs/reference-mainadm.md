@@ -6,7 +6,7 @@ sidebar_label: cmt-mainadm
 ## Command Invocation
 
 ```
-Usage: mainadm [options] mainRepo
+Usage: mainadm [init] [options] [mainRepo]
 
   mainRepo                 base folder holding main course repository
   -mjvm, --multi-jvm       generate multi-jvm build file
@@ -33,12 +33,23 @@ Usage: mainadm [options] mainRepo
                            no automatic reload on build definition change
   --help                   Prints the usage text
   -v, --version            Prints the version info
+
+Command: init [options]
+Creates a new project from a specified template
+  -l, --list-templates     List all available course templates
+  --template <value>       Name of a course template
+  --name <value>           The course name
+  --target <value>         Target directory
  ```
 
 ## Main administration tasks
 
-The `cmt-mainadm` command takes a single argument: the absolute path of the
-CMT main repository.
+The `cmt-mainadm` command can be invoked in two ways:
+
+- _init_ command mode: this allows creating a new CMT master repository
+  based on one of the CMT master templates. See section for more information, read
+  the ["Starting from a CMT master template"](your-first-project.md#starting-from-a-cmt-master-template) section.
+- admin mode. This chapter focuses on this mode.
 
 Depending on the action specified, the following options may apply:
 
