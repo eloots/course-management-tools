@@ -1,0 +1,482 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Your first CMT project · Course Management Tools</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Starting from a CMT master template"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Your first CMT project · Course Management Tools"/><meta property="og:type" content="website"/><meta property="og:url" content="https://eloots.github.io/course-management-tools/"/><meta property="og:description" content="## Starting from a CMT master template"/><meta property="og:image" content="https://eloots.github.io/course-management-tools/img/build.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://eloots.github.io/course-management-tools/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/course-management-tools/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><link rel="alternate" type="application/atom+xml" href="https://eloots.github.io/course-management-tools/blog/atom.xml" title="Course Management Tools Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://eloots.github.io/course-management-tools/blog/feed.xml" title="Course Management Tools Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/course-management-tools/js/scrollSpy.js"></script><link rel="stylesheet" href="/course-management-tools/css/main.css"/><script src="/course-management-tools/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/course-management-tools/"><img class="logo" src="/course-management-tools/img/favicon.ico" alt="Course Management Tools"/><h2 class="headerTitleWithLogo">Course Management Tools</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/course-management-tools/docs/getting_started" target="_self">Docs</a></li><li class=""><a href="https://github.com/eloots/course-management-tools" target="_blank">GitHub</a></li><li class=""><a href="/course-management-tools/blog/" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Getting Started</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/course-management-tools/docs/getting_started">Introduction</a></li><li class="navListItem"><a class="navItem" href="/course-management-tools/docs/workflows">Workflows</a></li><li class="navListItem"><a class="navItem" href="/course-management-tools/docs/install">Installation</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/course-management-tools/docs/your_first_project">Your first CMT project</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Reference</h3><ul class=""><li class="navListItem"><a class="navItem" href="/course-management-tools/docs/reference-intro">Introduction</a></li><li class="navListItem"><a class="navItem" href="/course-management-tools/docs/reference-mainadm">cmt-mainadm</a></li><li class="navListItem"><a class="navItem" href="/course-management-tools/docs/reference-cmtstudentify">cmt-studentify</a></li><li class="navListItem"><a class="navItem" href="/course-management-tools/docs/reference-linearize">cmt-linearize</a></li><li class="navListItem"><a class="navItem" href="/course-management-tools/docs/reference-delinearize">cmt-delinearize</a></li><li class="navListItem"><a class="navItem" href="/course-management-tools/docs/reference-config">CMT configuration</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Your first CMT project</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="starting-from-a-cmt-master-template"></a><a href="#starting-from-a-cmt-master-template" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Starting from a CMT master template</h2>
+<h3><a class="anchor" aria-hidden="true" id="introduction"></a><a href="#introduction" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Introduction</h3>
+<p>The Course Management Tools come with a number of templates. The available
+templates can be listed via <code>cmt-mainadm init -l</code> as shown here:</p>
+<pre><code class="hljs">$ cmt-mainadm init -l
+[<span class="hljs-number">0</span>] dotty-cmt-<span class="hljs-keyword">template</span>-common
+[<span class="hljs-number">1</span>] dotty-cmt-<span class="hljs-keyword">template</span>-<span class="hljs-keyword">no</span>-common
+[<span class="hljs-number">2</span>] play-cmt-<span class="hljs-keyword">template</span>-<span class="hljs-keyword">no</span>-common
+[<span class="hljs-number">3</span>] scala-cmt-<span class="hljs-keyword">template</span>-common
+[<span class="hljs-number">4</span>] scala-cmt-<span class="hljs-keyword">template</span>-<span class="hljs-keyword">no</span>-common
+</code></pre>
+<p>So, at the time we ran the above command, 5 CMT templates were available: 2 for
+<a href="https://dotty.epfl.ch">Dotty</a> projects, 2 for <a href="https://scala-lang.org">Scala</a> and
+one for a <a href="https://www.playframework.com">Play</a> project.</p>
+<blockquote>
+<p>NOTE
+As you can see, suffix of the template names is either <em>&quot;common&quot;</em> or <em>&quot;no_common&quot;</em>.
+If you have no idea what this means, start with the version ending in <em>&quot;no_common&quot;</em>.</p>
+</blockquote>
+<p>These templates are tested and valid CMT master repositories. Each of them contain
+just 2 exercises. They can be cloned as explained later in this section and
+subsequently adapted to your needs.</p>
+<p>During the cloning process, we can adapt the name of the course and decide on where
+the clone will be created by specifying a target directory.</p>
+<p>Cloning can be done in interactive- or non-interactive mode. Of course, in both cases,
+you'll need the name of a template. So, first run <code>cmt-mainadm init -l</code> to get an
+up-to-date list of CMT templates.</p>
+<p>Let's have a look at interactive and <a href="#non-interactive-mode">non-interactive mode</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="interactive-mode"></a><a href="#interactive-mode" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interactive mode</h3>
+<p>When running <code>cmt-mainadm init</code>, we automatically enter the interactive mode. This will
+prompt us for the parameters. The CMT template name, the name we want to assign to the
+cloned course, and the [base] target directory. After successful completion of the
+command, a folder with the name of the course. The name is converted to all lowercase
+characters and any spaces in the name swapped to dashes (<code>-</code>)).</p>
+<p>Let's see how this works in a trial run:</p>
+<pre><code class="hljs">$ cmt-mainadm init -l
+[0] dotty-cmt-template-common
+[1] dotty-cmt-template-no-common
+[2] play-cmt-template-no-common
+[3] scala-cmt-template-common
+[4] scala-cmt-template-no-common
+
+$ cmt-mainadm init
+ Template name: scala-cmt-template-no-common
+ Course name: Starting <span class="hljs-keyword">with</span> Scala
+ Target <span class="hljs-keyword">directory</span> [/<span class="hljs-keyword">Users</span>/ericloots/Trainingen/LBT/course-<span class="hljs-keyword">management</span>-tools]:/<span class="hljs-keyword">Users</span>/ericloots/tmp
+ Checkout <span class="hljs-keyword">template</span> <span class="hljs-keyword">into</span> /<span class="hljs-keyword">var</span>/folders/rq/vhwkgm9x2rs33jl4t2x6t6jr0000gn/T/sbt_78941d08
+ <span class="hljs-keyword">Initialized</span> <span class="hljs-keyword">empty</span> Git repository <span class="hljs-keyword">in</span> /<span class="hljs-keyword">private</span>/<span class="hljs-keyword">var</span>/folders/rq/vhwkgm9x2rs33jl4t2x6t6jr0000gn/T/sbt_78941d08/.git/
+ Updating origin
+ <span class="hljs-keyword">From</span> https://github.com/eloots/course-<span class="hljs-keyword">management</span>-tools
+  * [<span class="hljs-keyword">new</span> branch]      <span class="hljs-keyword">add</span>-documentation      -&gt; origin/<span class="hljs-keyword">add</span>-documentation
+  * [<span class="hljs-keyword">new</span> branch]      <span class="hljs-keyword">add</span>-social-media-preview-image-<span class="hljs-keyword">and</span>-fix-footer-links -&gt; origin/<span class="hljs-keyword">add</span>-social-media-preview-image-<span class="hljs-keyword">and</span>-fix-footer-links
+  * [<span class="hljs-keyword">new</span> branch]      gh-pages               -&gt; origin/gh-pages
+  * [<span class="hljs-keyword">new</span> branch]      <span class="hljs-keyword">main</span>                   -&gt; origin/<span class="hljs-keyword">main</span>
+  * [<span class="hljs-keyword">new</span> branch]      mainadm-<span class="hljs-keyword">validation</span>-fix -&gt; origin/mainadm-<span class="hljs-keyword">validation</span>-fix
+  * [<span class="hljs-keyword">new</span> tag]         <span class="hljs-number">1.0</span><span class="hljs-number">.0</span>                  -&gt; <span class="hljs-number">1.0</span><span class="hljs-number">.0</span>
+ <span class="hljs-keyword">From</span> https://github.com/eloots/course-<span class="hljs-keyword">management</span>-tools
+  * branch            <span class="hljs-keyword">main</span>       -&gt; FETCH_HEAD
+ <span class="hljs-keyword">Template</span> created <span class="hljs-keyword">in</span> /<span class="hljs-keyword">var</span>/folders/rq/vhwkgm9x2rs33jl4t2x6t6jr0000gn/T/sbt_78941d08/course-templates/scala-cmt-<span class="hljs-keyword">template</span>-<span class="hljs-keyword">no</span>-common/
+ Copying <span class="hljs-keyword">template</span> <span class="hljs-keyword">to</span> /<span class="hljs-keyword">Users</span>/ericloots/tmp/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala
+ <span class="hljs-keyword">Initialized</span> <span class="hljs-keyword">empty</span> Git repository <span class="hljs-keyword">in</span> /<span class="hljs-keyword">Users</span>/ericloots/tmp/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala/.git/
+ [<span class="hljs-keyword">main</span> (root-<span class="hljs-keyword">commit</span>) dedb4fc] <span class="hljs-keyword">Initial</span> <span class="hljs-keyword">commit</span>
+  <span class="hljs-number">28</span> files <span class="hljs-keyword">changed</span>, <span class="hljs-number">827</span> insertions(+)
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> .courseName
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> .gitignore
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> .sbtopts
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> README.md
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> build.sbt
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> course-management.conf
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/AdditionalSettings.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/CommonSettings.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/CompileOptions.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/Dependencies.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/MPSelection.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/Man.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/Navigation.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/StudentCommandsPlugin.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/StudentKeys.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/build.properties
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_000_initial_state/README.md
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_000_initial_state/src/<span class="hljs-keyword">main</span>/resources/logback.xml
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_000_initial_state/src/<span class="hljs-keyword">main</span>/scala/org/cmt/Main.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_000_initial_state/src/<span class="hljs-keyword">main</span>/scala/org/cmt/Math.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_000_initial_state/src/<span class="hljs-keyword">test</span>/resources/logback-test.xml
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_000_initial_state/src/<span class="hljs-keyword">test</span>/scala/org/cmt/MathSuite.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_001_add_multiplication/README.md
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_001_add_multiplication/src/<span class="hljs-keyword">main</span>/resources/logback.xml
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_001_add_multiplication/src/<span class="hljs-keyword">main</span>/scala/org/cmt/Main.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_001_add_multiplication/src/<span class="hljs-keyword">main</span>/scala/org/cmt/Math.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_001_add_multiplication/src/<span class="hljs-keyword">test</span>/resources/logback-test.xml
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_001_add_multiplication/src/<span class="hljs-keyword">test</span>/scala/org/cmt/MathSuite.scala
+
+</code></pre>
+<p><br></p>
+<blockquote>
+<p>NOTE
+The path of the target folder should be an absolute path to an existing folder</p>
+</blockquote>
+<p>Let's have a look at the cloned repository.</p>
+<pre><code class="hljs">$ cd /Users/ericloots/tmp
+
+$ ls -l
+drwxr-xr-x  12 ericloots  staff  384 Aug 11 11:41 starting-<span class="hljs-keyword">with</span>-scala
+
+$ cd <span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala
+
+$ sbt
+
+&lt;elided&gt;
+
+man [e] &gt; <span class="hljs-keyword">Starting</span> <span class="hljs-keyword">with</span> Scala &gt; <span class="hljs-keyword">initial</span> state &gt; projects
+[info] <span class="hljs-keyword">In</span> <span class="hljs-keyword">file</span>:/<span class="hljs-keyword">Users</span>/ericloots/tmp/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala/
+[info]     scala-<span class="hljs-keyword">master</span>
+[info]   * step_000_initial_state
+[info]     step_001_add_multiplication
+
+man [e] &gt; <span class="hljs-keyword">Starting</span> <span class="hljs-keyword">with</span> Scala &gt; <span class="hljs-keyword">initial</span> state &gt; <span class="hljs-keyword">test</span>
+[info] Compiling <span class="hljs-number">2</span> Scala sources <span class="hljs-keyword">to</span> /<span class="hljs-keyword">Users</span>/ericloots/tmp/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala/step_000_initial_state/target/scala<span class="hljs-number">-2.13</span>/classes ...
+[info] Compiling <span class="hljs-number">1</span> Scala <span class="hljs-keyword">source</span> <span class="hljs-keyword">to</span> /<span class="hljs-keyword">Users</span>/ericloots/tmp/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala/step_000_initial_state/target/scala<span class="hljs-number">-2.13</span>/<span class="hljs-keyword">test</span>-classes ...
+org.cmt.MathSuite:
+  + Adding <span class="hljs-number">0</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">any</span> <span class="hljs-built_in">integer</span> <span class="hljs-keyword">value</span> should <span class="hljs-keyword">return</span> the same <span class="hljs-keyword">value</span> <span class="hljs-number">0.01</span>s
+  + <span class="hljs-keyword">Verify</span> basic addition <span class="hljs-number">0.001</span>s
+[info] Passed: Total <span class="hljs-number">2</span>, <span class="hljs-keyword">Failed</span> <span class="hljs-number">0</span>, <span class="hljs-keyword">Errors</span> <span class="hljs-number">0</span>, Passed <span class="hljs-number">2</span>
+[<span class="hljs-keyword">success</span>] Total <span class="hljs-built_in">time</span>: <span class="hljs-number">3</span> s, completed <span class="hljs-number">11</span> Aug <span class="hljs-number">2020</span>, <span class="hljs-number">09</span>:<span class="hljs-number">46</span>:<span class="hljs-number">53</span>
+
+man [e] &gt; <span class="hljs-keyword">Starting</span> <span class="hljs-keyword">with</span> Scala &gt; <span class="hljs-keyword">initial</span> state &gt; <span class="hljs-keyword">project</span> step_001_add_multiplication
+[info] <span class="hljs-keyword">set</span> <span class="hljs-keyword">current</span> <span class="hljs-keyword">project</span> <span class="hljs-keyword">to</span> step_001_add_multiplication (<span class="hljs-keyword">in</span> <span class="hljs-keyword">build</span> <span class="hljs-keyword">file</span>:/<span class="hljs-keyword">Users</span>/ericloots/tmp/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala/)
+
+man [e] &gt; <span class="hljs-keyword">Starting</span> <span class="hljs-keyword">with</span> Scala &gt; <span class="hljs-keyword">add</span> multiplication &gt; <span class="hljs-keyword">test</span>
+[info] Compiling <span class="hljs-number">2</span> Scala sources <span class="hljs-keyword">to</span> /<span class="hljs-keyword">Users</span>/ericloots/tmp/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala/step_001_add_multiplication/target/scala<span class="hljs-number">-2.13</span>/classes ...
+[info] Compiling <span class="hljs-number">1</span> Scala <span class="hljs-keyword">source</span> <span class="hljs-keyword">to</span> /<span class="hljs-keyword">Users</span>/ericloots/tmp/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala/step_001_add_multiplication/target/scala<span class="hljs-number">-2.13</span>/<span class="hljs-keyword">test</span>-classes ...
+org.cmt.MathSuite:
+  + Adding <span class="hljs-number">0</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">any</span> <span class="hljs-built_in">integer</span> <span class="hljs-keyword">value</span> should <span class="hljs-keyword">return</span> the same <span class="hljs-keyword">value</span> <span class="hljs-number">0.007</span>s
+  + <span class="hljs-keyword">Verify</span> basic addition <span class="hljs-number">0.001</span>s
+  + Multiplying <span class="hljs-keyword">any</span> <span class="hljs-built_in">integer</span> <span class="hljs-keyword">value</span> <span class="hljs-keyword">by</span> <span class="hljs-number">1</span> should <span class="hljs-keyword">return</span> the same <span class="hljs-keyword">value</span> <span class="hljs-number">0.0</span>s
+  + <span class="hljs-keyword">Verify</span> basic multiplication <span class="hljs-number">0.001</span>s
+[info] Passed: Total <span class="hljs-number">4</span>, <span class="hljs-keyword">Failed</span> <span class="hljs-number">0</span>, <span class="hljs-keyword">Errors</span> <span class="hljs-number">0</span>, Passed <span class="hljs-number">4</span>
+[<span class="hljs-keyword">success</span>] Total <span class="hljs-built_in">time</span>: <span class="hljs-number">1</span> s, completed <span class="hljs-number">11</span> Aug <span class="hljs-number">2020</span>, <span class="hljs-number">09</span>:<span class="hljs-number">47</span>:<span class="hljs-number">04</span>
+
+man [e] &gt; <span class="hljs-keyword">Starting</span> <span class="hljs-keyword">with</span> Scala &gt; <span class="hljs-keyword">add</span> multiplication &gt;
+ 
+</code></pre>
+<p><br>
+A few things to note from the above output:</p>
+<ul>
+<li>We see that the name of the project, <em>Starting with Scala</em> is reflected
+in:
+<ul>
+<li>the name of the cloned CMT template: <em>starting-with-scala</em></li>
+<li>the sbt prompt: (man [e] &gt; <strong>Starting with Scala</strong> &gt; initial state &gt;_</li>
+</ul></li>
+<li>Running the sbt <code>projects</code> command shows us that there are two exercises. We
+see that the name of the exercises has been &quot;tuned&quot; with a <em>step</em> prefix</li>
+<li>The tests are run on the first exercise (named <em>step_000_initial_state</em>) by
+running the sbt <code>test</code> command</li>
+<li>We switch to the second exercise by running the sbt
+<code>project step_001_add_multiplication</code> command and run the tests by running
+the sbt <code>test</code> command</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="_studentifying_-your-first-project"></a><a href="#_studentifying_-your-first-project" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><em>Studentifying</em> your first project</h3>
+<p>With the cloned project in place, we can now <em>studentify</em> it and try out some of
+the functionality of the <em>studentified</em> repository. We will create the <em>studentified</em>
+repository in the <code>/Users/ericloots/tmp/stu</code> folder:</p>
+<pre><code class="hljs">$ cmt-studentify -dot /Users/ericloots/tmp/starting-<span class="hljs-keyword">with</span>-scala /<span class="hljs-keyword">Users</span>/ericloots/tmp/stu
+CHECKING WORKSPACE <span class="hljs-keyword">in</span> /<span class="hljs-keyword">Users</span>/ericloots/tmp/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala
+<span class="hljs-keyword">Initialized</span> <span class="hljs-keyword">empty</span> Git repository <span class="hljs-keyword">in</span> /<span class="hljs-keyword">private</span>/<span class="hljs-keyword">var</span>/folders/rq/vhwkgm9x2rs33jl4t2x6t6jr0000gn/T/sbt_6a77e07a/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala.git/
+<span class="hljs-keyword">To</span> /<span class="hljs-keyword">var</span>/folders/rq/vhwkgm9x2rs33jl4t2x6t6jr0000gn/T/sbt_6a77e07a/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala.git
+ * [<span class="hljs-keyword">new</span> branch]      <span class="hljs-keyword">HEAD</span> -&gt; <span class="hljs-number">5E8824</span>BB<span class="hljs-number">-46</span>D7<span class="hljs-number">-4246</span><span class="hljs-number">-8</span>D8F<span class="hljs-number">-9981934</span>B1D67
+Cloning <span class="hljs-keyword">into</span> <span class="hljs-string">'starting-with-scala'</span>...
+done.
+Processing exercises:
+    step_000_initial_state
+    step_001_add_multiplication
+
+Setting student repository bookmark <span class="hljs-keyword">to</span> step_000_initial_state
+
+</code></pre>
+<p>The <em>studentified</em> repository is an sbt build with a number of extra custom commands:</p>
+<ul>
+<li><code>listExercises</code></li>
+<li><code>man</code> and <code>man e</code> to display the global project README file and the exercise
+instructions respectively</li>
+<li>Moving around between exercises:
+<ul>
+<li><code>nextExercise</code> and <code>prevExercise</code>: move to the next or previous exercise respectively.</li>
+<li><code>gotoExercise &lt;exercise_name&gt;</code>. Basically the same as <code>nextExercise</code>, but allowing
+an move to a specific exercise</li>
+<li><code>gotoFirstExercise</code>. Jump to the first exercise in the course
+<ul>
+<li>All the above commands share a common property: they will pull in the test code
+for the &quot;selected&quot; exercise. Any other code that was present prior to executing
+the command is left unchanged</li>
+</ul></li>
+</ul></li>
+<li><code>pulSolution</code> will &quot;pull&quot; the solution for the current exercise. Note that this will
+overwrite any code present in the current exercise.</li>
+<li><code>saveState</code> will &quot;checkpoint&quot; the current state (code) for the current exercise. An
+exercise's state can be saved as many time as desired, but only the last saved state
+is retained</li>
+<li><code>savedStates</code> will list any previously saved states</li>
+<li><code>restoreState &lt;saved state&gt;</code>. Will restore the state of a previously saved state
+of an exercise. Note that this command will automatically reposition the current
+exercise to the restored one</li>
+</ul>
+<p>Let's give this a spin by switching to the <em>linearized</em> repository and fire-up sbt
+in its root folder.</p>
+<pre><code class="hljs">$ cd /Users/ericloots/tmp/stu/starting-<span class="hljs-keyword">with</span>-scala
+
+~/tmp/stu/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala <span class="hljs-keyword">on</span>  <span class="hljs-keyword">main</span> ⌚ <span class="hljs-number">12</span>:<span class="hljs-number">50</span>:<span class="hljs-number">08</span>
+$ sbt
+[info] welcome <span class="hljs-keyword">to</span> sbt <span class="hljs-number">1.3</span><span class="hljs-number">.13</span> (N/A <span class="hljs-keyword">Java</span> <span class="hljs-number">13.0</span><span class="hljs-number">.2</span>)
+
+&lt;elided&gt;
+
+man [e] &gt; <span class="hljs-keyword">Starting</span> <span class="hljs-keyword">with</span> Scala &gt; <span class="hljs-keyword">initial</span> state &gt; listExercises
+  <span class="hljs-number">1.</span> * step_000_initial_state
+  <span class="hljs-number">2.</span>   step_001_add_multiplication
+
+man [e] &gt; <span class="hljs-keyword">Starting</span> <span class="hljs-keyword">with</span> Scala &gt; <span class="hljs-keyword">initial</span> state &gt; man
+<span class="hljs-comment"># Basic Scala CMT master master project</span>
+
+<span class="hljs-comment">## Description</span>
+
+This <span class="hljs-keyword">project</span> can be used <span class="hljs-keyword">as</span> a <span class="hljs-keyword">template</span> <span class="hljs-keyword">for</span> a <span class="hljs-keyword">master</span>
+<span class="hljs-keyword">project</span> <span class="hljs-keyword">managed</span> <span class="hljs-keyword">by</span> the [Course <span class="hljs-keyword">Management</span> Tools](https://github.com/eloots/course-<span class="hljs-keyword">management</span>-tools)
+
+It contains <span class="hljs-number">2</span> simple steps (<span class="hljs-keyword">or</span> exercises)
+
+</code></pre>
+<p><br>
+Ok, we see the two exercises, with the current exercise set to <code>step_000_initial_state</code>.
+We also ran the <code>man</code> command to display the main README file.</p>
+<p>Let's display the exercise instructions for the current exercise and run the tests for
+that exercise.</p>
+<pre><code class="hljs"># Initial state - basic addition
+
+## Introduction
+
+- Add basic addition <span class="hljs-keyword">in</span> object Math
+- Adds a main method
+
+
+man [e] &gt; Starting with Scala &gt; initial state &gt; test
+[info] Compiling <span class="hljs-number">2</span> Scala sources to /Users/ericloots/tmp/stu/starting-with-scala/exercises/target/scala<span class="hljs-number">-2.13</span>/classes ...
+[info] Compiling <span class="hljs-number">1</span> Scala source to /Users/ericloots/tmp/stu/starting-with-scala/exercises/target/scala<span class="hljs-number">-2.13</span>/test-classes ...
+org.cmt.MathSuite:
+  + Adding <span class="hljs-number">0</span> to any <span class="hljs-built_in">int</span>eger value should <span class="hljs-keyword">return</span> the same value <span class="hljs-number">0.01</span>s
+  + Verify basic addition <span class="hljs-number">0.001</span>s
+[info] Passed: Total <span class="hljs-number">2</span>, Failed <span class="hljs-number">0</span>, Errors <span class="hljs-number">0</span>, Passed <span class="hljs-number">2</span>
+[success] Total time: <span class="hljs-number">3</span> s, completed <span class="hljs-number">11</span> Aug <span class="hljs-number">2020</span>, <span class="hljs-number">10</span>:<span class="hljs-number">55</span>:<span class="hljs-number">17</span>
+</code></pre>
+<p><br>
+We can now move to the next exercise by issuing the <code>nextExercise</code> command. To
+demonstrate that we pull in the test code for the second exercise, but not the
+solution, we will run the tests and witness that compilation errors are reported
+as the solution code is missing:</p>
+<pre><code class="hljs">man [e] &gt; Starting with Scala &gt; initial state &gt; nextExercise
+[<span class="hljs-builtin-name">INFO</span>] Moved <span class="hljs-keyword">to</span> step_001_add_multiplication
+
+man [e] &gt; Starting with Scala &gt; <span class="hljs-builtin-name">add</span> multiplication &gt; man e
+<span class="hljs-comment"># Add multiplication</span>
+
+<span class="hljs-comment">## Background</span>
+
+- <span class="hljs-builtin-name">Add</span> multiplication <span class="hljs-keyword">to</span> object Math
+
+man [e] &gt; Starting with Scala &gt; <span class="hljs-builtin-name">add</span> multiplication &gt; test
+[<span class="hljs-builtin-name">info</span>] Compiling 1 Scala source <span class="hljs-keyword">to</span> /Users/ericloots/tmp/stu/starting-with-scala/exercises/target/scala-2.13/test-classes <span class="hljs-built_in">..</span>.
+[<span class="hljs-builtin-name">error</span>] /Users/ericloots/tmp/stu/starting-with-scala/exercises/src/test/scala/org/cmt/MathSuite.scala:24:20: <span class="hljs-keyword">not</span> found: value multiply
+[<span class="hljs-builtin-name">error</span>] <span class="hljs-builtin-name">Error</span> occurred <span class="hljs-keyword">in</span> an application involving<span class="hljs-built_in"> default </span>arguments.
+[<span class="hljs-builtin-name">error</span>]     } assertEquals(multiply(i, 1), i)
+[<span class="hljs-builtin-name">error</span>]                    ^
+[<span class="hljs-builtin-name">error</span>] /Users/ericloots/tmp/stu/starting-with-scala/exercises/src/test/scala/org/cmt/MathSuite.scala:30:18: <span class="hljs-keyword">not</span> found: value multiply
+[<span class="hljs-builtin-name">error</span>] <span class="hljs-builtin-name">Error</span> occurred <span class="hljs-keyword">in</span> an application involving<span class="hljs-built_in"> default </span>arguments.
+[<span class="hljs-builtin-name">error</span>]     assertEquals(multiply(100, 0), 0)
+[<span class="hljs-builtin-name">error</span>]                  ^
+[<span class="hljs-builtin-name">error</span>] /Users/ericloots/tmp/stu/starting-with-scala/exercises/src/test/scala/org/cmt/MathSuite.scala:31:18: <span class="hljs-keyword">not</span> found: value multiply
+[<span class="hljs-builtin-name">error</span>] <span class="hljs-builtin-name">Error</span> occurred <span class="hljs-keyword">in</span> an application involving<span class="hljs-built_in"> default </span>arguments.
+[<span class="hljs-builtin-name">error</span>]     assertEquals(multiply(100, -1), -100)
+[<span class="hljs-builtin-name">error</span>]                  ^
+[<span class="hljs-builtin-name">error</span>] /Users/ericloots/tmp/stu/starting-with-scala/exercises/src/test/scala/org/cmt/MathSuite.scala:32:18: <span class="hljs-keyword">not</span> found: value multiply
+[<span class="hljs-builtin-name">error</span>] <span class="hljs-builtin-name">Error</span> occurred <span class="hljs-keyword">in</span> an application involving<span class="hljs-built_in"> default </span>arguments.
+[<span class="hljs-builtin-name">error</span>]     assertEquals(multiply(13, 14), 182)
+[<span class="hljs-builtin-name">error</span>]                  ^
+[warn] /Users/ericloots/tmp/stu/starting-with-scala/exercises/src/test/scala/org/cmt/MathSuite.scala:20:17: Unused import
+[warn]     import Math._
+[warn]                 ^
+[warn] /Users/ericloots/tmp/stu/starting-with-scala/exercises/src/test/scala/org/cmt/MathSuite.scala:28:17: Unused import
+[warn]     import Math._
+[warn]                 ^
+[warn] two warnings found
+[<span class="hljs-builtin-name">error</span>] four errors found
+[<span class="hljs-builtin-name">error</span>] (Test / compileIncremental) Compilation failed
+[<span class="hljs-builtin-name">error</span>] Total time: 0 s, completed 11 Aug 2020, 10:58:00
+man [e] &gt; Starting with Scala &gt; <span class="hljs-builtin-name">add</span> multiplication &gt;
+</code></pre>
+<p><br>
+Of course, in a class room setting, the student's task would add the code required to
+make the tests pass. For the sake of demonstration, we will simply &quot;pull&quot; that code
+and run the tests again:</p>
+<pre><code class="hljs">man [e] &gt; Starting with Scala &gt; add multiplication &gt; pullSolution
+[INFO] Solution <span class="hljs-keyword">for</span> exercise step_001_add_multiplication pulled successfully
+man [e] &gt; Starting with Scala &gt; add multiplication &gt; test
+[info] Compiling <span class="hljs-number">2</span> Scala sources to /Users/ericloots/tmp/stu/starting-with-scala/exercises/target/scala<span class="hljs-number">-2.13</span>/classes ...
+[info] Compiling <span class="hljs-number">1</span> Scala source to /Users/ericloots/tmp/stu/starting-with-scala/exercises/target/scala<span class="hljs-number">-2.13</span>/test-classes ...
+org.cmt.MathSuite:
+  + Adding <span class="hljs-number">0</span> to any <span class="hljs-built_in">int</span>eger value should <span class="hljs-keyword">return</span> the same value <span class="hljs-number">0.008</span>s
+  + Verify basic addition <span class="hljs-number">0.001</span>s
+  + Multiplying any <span class="hljs-built_in">int</span>eger value by <span class="hljs-number">1</span> should <span class="hljs-keyword">return</span> the same value <span class="hljs-number">0.0</span>s
+  + Verify basic multiplication <span class="hljs-number">0.001</span>s
+[info] Passed: Total <span class="hljs-number">4</span>, Failed <span class="hljs-number">0</span>, Errors <span class="hljs-number">0</span>, Passed <span class="hljs-number">4</span>
+[success] Total time: <span class="hljs-number">1</span> s, completed <span class="hljs-number">11</span> Aug <span class="hljs-number">2020</span>, <span class="hljs-number">11</span>:<span class="hljs-number">00</span>:<span class="hljs-number">51</span>
+man [e] &gt; Starting with Scala &gt; add multiplication &gt;
+</code></pre>
+<p><br>
+As expected, the test now pass.</p>
+<p>We will finish of by demonstrating the <code>saveState</code>, <code>savedStates</code>, and <code>restoreState</code>
+commands.</p>
+<pre><code class="hljs">man [e] &gt; Starting with Scala &gt; <span class="hljs-builtin-name">add</span> multiplication &gt; listExercises
+  1.   step_000_initial_state
+  2. * step_001_add_multiplication
+
+man [e] &gt; Starting with Scala &gt; <span class="hljs-builtin-name">add</span> multiplication &gt; savedStates
+[WARN] <span class="hljs-literal">No</span> previously saved exercise states found
+
+man [e] &gt; Starting with Scala &gt; <span class="hljs-builtin-name">add</span> multiplication &gt; saveState
+[<span class="hljs-builtin-name">INFO</span>] State <span class="hljs-keyword">for</span> exercise step_001_add_multiplication saved successfully
+
+man [e] &gt; Starting with Scala &gt; <span class="hljs-builtin-name">add</span> multiplication &gt; savedStates
+[<span class="hljs-builtin-name">INFO</span>] Saved exercise states are available <span class="hljs-keyword">for</span> the following exercise(s):
+        step_001_add_multiplication
+
+man [e] &gt; Starting with Scala &gt; <span class="hljs-builtin-name">add</span> multiplication &gt; gotoFirstExercise
+[<span class="hljs-builtin-name">INFO</span>] Moved <span class="hljs-keyword">to</span> first exercise <span class="hljs-keyword">in</span> course
+
+man [e] &gt; Starting with Scala &gt; <span class="hljs-builtin-name">add</span> multiplication &gt; listExercises
+  1. * step_000_initial_state
+  2.   step_001_add_multiplication
+
+man [e] &gt; Starting with Scala &gt; initial state &gt; pullSolution
+[<span class="hljs-builtin-name">INFO</span>] Solution <span class="hljs-keyword">for</span> exercise step_000_initial_state pulled successfully
+
+man [e] &gt; Starting with Scala &gt; initial state &gt; test
+[<span class="hljs-builtin-name">info</span>] Compiling 2 Scala sources <span class="hljs-keyword">to</span> /Users/ericloots/tmp/stu/starting-with-scala/exercises/target/scala-2.13/classes <span class="hljs-built_in">..</span>.
+[<span class="hljs-builtin-name">info</span>] Compiling 1 Scala source <span class="hljs-keyword">to</span> /Users/ericloots/tmp/stu/starting-with-scala/exercises/target/scala-2.13/test-classes <span class="hljs-built_in">..</span>.
+org.cmt.MathSuite:
+  + Adding 0 <span class="hljs-keyword">to</span> any integer value should return the same value 0.006s
+  + Verify basic addition 0.0s
+[<span class="hljs-builtin-name">info</span>] Passed: Total 2, Failed 0, Errors 0, Passed 2
+[success] Total time: 1 s, completed 11 Aug 2020, 11:04:22
+
+man [e] &gt; Starting with Scala &gt; initial state &gt; restoreState step_001_add_multiplication
+[<span class="hljs-builtin-name">INFO</span>] Exercise step_001_add_multiplication restored
+
+man [e] &gt; Starting with Scala &gt; <span class="hljs-builtin-name">add</span> multiplication &gt; listExercises
+  1.   step_000_initial_state
+  2. * step_001_add_multiplication
+
+man [e] &gt; Starting with Scala &gt; <span class="hljs-builtin-name">add</span> multiplication &gt; test
+[<span class="hljs-builtin-name">info</span>] Compiling 2 Scala sources <span class="hljs-keyword">to</span> /Users/ericloots/tmp/stu/starting-with-scala/exercises/target/scala-2.13/classes <span class="hljs-built_in">..</span>.
+[<span class="hljs-builtin-name">info</span>] Compiling 1 Scala source <span class="hljs-keyword">to</span> /Users/ericloots/tmp/stu/starting-with-scala/exercises/target/scala-2.13/test-classes <span class="hljs-built_in">..</span>.
+org.cmt.MathSuite:
+  + Adding 0 <span class="hljs-keyword">to</span> any integer value should return the same value 0.006s
+  + Verify basic addition 0.0s
+  + Multiplying any integer value by 1 should return the same value 0.001s
+  + Verify basic multiplication 0.0s
+[<span class="hljs-builtin-name">info</span>] Passed: Total 4, Failed 0, Errors 0, Passed 4
+[success] Total time: 1 s, completed 11 Aug 2020, 11:04:58
+
+man [e] &gt; Starting with Scala &gt; <span class="hljs-builtin-name">add</span> multiplication &gt;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="non-interactive-mode"></a><a href="#non-interactive-mode" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Non-interactive mode</h3>
+<p>We can create a clone of the CMT master template in non-interactive mode by
+specifying the required parameters on the command line as shown here:</p>
+<pre><code class="hljs">mainadm init <span class="hljs-comment">--template scala-cmt-template-no-common --name "Starting with Scala" --target /Users/ericloots/tmp</span>
+ Template name: scala-cmt-template-no-common
+ Course name: Starting <span class="hljs-keyword">with</span> Scala
+ Target <span class="hljs-keyword">directory</span> [/<span class="hljs-keyword">Users</span>/ericloots/Trainingen/LBT/course-<span class="hljs-keyword">management</span>-tools]:/<span class="hljs-keyword">Users</span>/ericloots/tmp
+ Checkout <span class="hljs-keyword">template</span> <span class="hljs-keyword">into</span> /<span class="hljs-keyword">var</span>/folders/rq/vhwkgm9x2rs33jl4t2x6t6jr0000gn/T/sbt_78941d08
+ <span class="hljs-keyword">Initialized</span> <span class="hljs-keyword">empty</span> Git repository <span class="hljs-keyword">in</span> /<span class="hljs-keyword">private</span>/<span class="hljs-keyword">var</span>/folders/rq/vhwkgm9x2rs33jl4t2x6t6jr0000gn/T/sbt_78941d08/.git/
+ Updating origin
+ <span class="hljs-keyword">From</span> https://github.com/eloots/course-<span class="hljs-keyword">management</span>-tools
+  * [<span class="hljs-keyword">new</span> branch]      <span class="hljs-keyword">add</span>-documentation      -&gt; origin/<span class="hljs-keyword">add</span>-documentation
+  * [<span class="hljs-keyword">new</span> branch]      <span class="hljs-keyword">add</span>-social-media-preview-image-<span class="hljs-keyword">and</span>-fix-footer-links -&gt; origin/<span class="hljs-keyword">add</span>-social-media-preview-image-<span class="hljs-keyword">and</span>-fix-footer-links
+  * [<span class="hljs-keyword">new</span> branch]      gh-pages               -&gt; origin/gh-pages
+  * [<span class="hljs-keyword">new</span> branch]      <span class="hljs-keyword">main</span>                   -&gt; origin/<span class="hljs-keyword">main</span>
+  * [<span class="hljs-keyword">new</span> branch]      mainadm-<span class="hljs-keyword">validation</span>-fix -&gt; origin/mainadm-<span class="hljs-keyword">validation</span>-fix
+  * [<span class="hljs-keyword">new</span> tag]         <span class="hljs-number">1.0</span><span class="hljs-number">.0</span>                  -&gt; <span class="hljs-number">1.0</span><span class="hljs-number">.0</span>
+ <span class="hljs-keyword">From</span> https://github.com/eloots/course-<span class="hljs-keyword">management</span>-tools
+  * branch            <span class="hljs-keyword">main</span>       -&gt; FETCH_HEAD
+ <span class="hljs-keyword">Template</span> created <span class="hljs-keyword">in</span> /<span class="hljs-keyword">var</span>/folders/rq/vhwkgm9x2rs33jl4t2x6t6jr0000gn/T/sbt_78941d08/course-templates/scala-cmt-<span class="hljs-keyword">template</span>-<span class="hljs-keyword">no</span>-common/
+ Copying <span class="hljs-keyword">template</span> <span class="hljs-keyword">to</span> /<span class="hljs-keyword">Users</span>/ericloots/tmp/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala
+ <span class="hljs-keyword">Initialized</span> <span class="hljs-keyword">empty</span> Git repository <span class="hljs-keyword">in</span> /<span class="hljs-keyword">Users</span>/ericloots/tmp/<span class="hljs-keyword">starting</span>-<span class="hljs-keyword">with</span>-scala/.git/
+ [<span class="hljs-keyword">main</span> (root-<span class="hljs-keyword">commit</span>) dedb4fc] <span class="hljs-keyword">Initial</span> <span class="hljs-keyword">commit</span>
+  <span class="hljs-number">28</span> files <span class="hljs-keyword">changed</span>, <span class="hljs-number">827</span> insertions(+)
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> .courseName
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> .gitignore
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> .sbtopts
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> README.md
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> build.sbt
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> course-management.conf
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/AdditionalSettings.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/CommonSettings.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/CompileOptions.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/Dependencies.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/MPSelection.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/Man.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/Navigation.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/StudentCommandsPlugin.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/StudentKeys.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> <span class="hljs-keyword">project</span>/build.properties
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_000_initial_state/README.md
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_000_initial_state/src/<span class="hljs-keyword">main</span>/resources/logback.xml
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_000_initial_state/src/<span class="hljs-keyword">main</span>/scala/org/cmt/Main.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_000_initial_state/src/<span class="hljs-keyword">main</span>/scala/org/cmt/Math.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_000_initial_state/src/<span class="hljs-keyword">test</span>/resources/logback-test.xml
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_000_initial_state/src/<span class="hljs-keyword">test</span>/scala/org/cmt/MathSuite.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_001_add_multiplication/README.md
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_001_add_multiplication/src/<span class="hljs-keyword">main</span>/resources/logback.xml
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_001_add_multiplication/src/<span class="hljs-keyword">main</span>/scala/org/cmt/Main.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_001_add_multiplication/src/<span class="hljs-keyword">main</span>/scala/org/cmt/Math.scala
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_001_add_multiplication/src/<span class="hljs-keyword">test</span>/resources/logback-test.xml
+  <span class="hljs-keyword">create</span> <span class="hljs-keyword">mode</span> <span class="hljs-number">100644</span> step_001_add_multiplication/src/<span class="hljs-keyword">test</span>/scala/org/cmt/MathSuite.scala
+
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/course-management-tools/docs/install"><span class="arrow-prev">← </span><span>Installation</span></a><a class="docs-next button" href="/course-management-tools/docs/reference-intro"><span>Introduction</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#starting-from-a-cmt-master-template">Starting from a CMT master template</a><ul class="toc-headings"><li><a href="#introduction">Introduction</a></li><li><a href="#interactive-mode">Interactive mode</a></li><li><a href="#_studentifying_-your-first-project"><em>Studentifying</em> your first project</a></li><li><a href="#non-interactive-mode">Non-interactive mode</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/course-management-tools/" class="nav-home"><img src="/course-management-tools/img/favicon.ico" alt="Course Management Tools" width="66" height="58"/></a><div><h5>Docs</h5><a href="/course-management-tools/docs/install">Getting Started</a><a href="/course-management-tools/docs/reference-intro">Reference</a></div><div><h5>Community</h5><a href="https://github.com/eloots/course-management-tools/issues" target="_blank">Open an issue or ask questions</a></div><div><h5>More</h5><a href="/course-management-tools/blog">Blog</a><a href="https://github.com/eloots/course-management-tools" target="_blank">GitHub</a><a class="github-button" href="https://github.com/eloots/course-management-tools" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div><div><img style="float:left;margin:5px" src="/course-management-tools/img/jetbrains.svg" alt="Course Management Tools" width="66" height="58"/><div><a href="https://www.jetbrains.com/?from=course-management-tools" target="_blank">JetBrains supports this project by providing core project contributors with a set of best-in-class developer tools free of charge.</a></div></div></section><section class="copyright">Copyright © 2020 Course Management Tools</section></footer></div></body></html>
