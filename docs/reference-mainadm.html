@@ -55,7 +55,7 @@
               }
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">cmt-mainadm Command Reference</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="command-invocation"></a><a href="#command-invocation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Command Invocation</h2>
-<pre><code class="hljs"><span class="hljs-attribute">Usage</span>: mainadm [options] mainRepo
+<pre><code class="hljs"><span class="hljs-attribute">Usage</span>: mainadm [init] [options] [mainRepo]
 
 <span class="livecodeserver">  mainRepo                 base <span class="hljs-built_in">folder</span> holding main course repository
   -mjvm, <span class="hljs-comment">--multi-jvm       generate multi-jvm build file</span>
@@ -82,10 +82,22 @@
                            no automatic reload <span class="hljs-keyword">on</span> <span class="hljs-title">build</span> <span class="hljs-title">definition</span> <span class="hljs-title">change</span>
   <span class="hljs-comment">--help                   Prints the usage text</span>
   -v, <span class="hljs-comment">--version            Prints the version info</span>
+
+Command: init [options]
+Creates <span class="hljs-keyword">a</span> <span class="hljs-built_in">new</span> project <span class="hljs-built_in">from</span> <span class="hljs-keyword">a</span> specified template
+  -l, <span class="hljs-comment">--list-templates     List all available course templates</span>
+  <span class="hljs-comment">--template &lt;value&gt;       Name of a course template</span>
+  <span class="hljs-comment">--name &lt;value&gt;           The course name</span>
+  <span class="hljs-comment">--target &lt;value&gt;         Target directory</span>
 </span></code></pre>
 <h2><a class="anchor" aria-hidden="true" id="main-administration-tasks"></a><a href="#main-administration-tasks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Main administration tasks</h2>
-<p>The <code>cmt-mainadm</code> command takes a single argument: the absolute path of the
-CMT main repository.</p>
+<p>The <code>cmt-mainadm</code> command can be invoked in two ways:</p>
+<ul>
+<li><em>init</em> command mode: this allows creating a new CMT master repository
+based on one of the CMT master templates. See section for more information, read
+the <a href="/course-management-tools/docs/your_first_project#starting-from-a-cmt-master-template">&quot;Starting from a CMT master template&quot;</a> section.</li>
+<li>admin mode. This chapter focuses on this mode.</li>
+</ul>
 <p>Depending on the action specified, the following options may apply:</p>
 <h3><a class="anchor" aria-hidden="true" id="-dot-dotty-compatible-build-definition"></a><a href="#-dot-dotty-compatible-build-definition" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>-dot</code>: Dotty compatible build definition</h3>
 <p>With this option, the Scala version is assumed to be set exactly in the
