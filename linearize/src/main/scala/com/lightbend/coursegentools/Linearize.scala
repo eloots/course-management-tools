@@ -70,35 +70,54 @@ object Linearize {
     val linearizedProject = new File(linearizedOutputFolder, projectName)
 
     copyMain(cleanMainRepo, linearizedProject)
-    createStudentifiedBuildFile(linearizedProject, multiJVM, isADottyProject, autoReloadOnBuildDefChange)
+
+    if (config.studentTooling == StudentTooling.SBT) {
+      createStudentifiedBuildFile(linearizedProject, multiJVM, isADottyProject, autoReloadOnBuildDefChange)
+    }
+
     createBookmarkFile(config.studentifyModeClassic.studentifiedBaseFolder, linearizedProject)
-    val templateFileList: List[String] =
-      List(
-        "Man.scala",
-        "Navigation.scala",
-        "StudentCommandsPlugin.scala",
-        "StudentKeys.scala"
-      )
+
     if (!bareLinRepo) {
-      addSbtCommands(templateFileList, linearizedProject)
-      loadStudentSettings(mainRepo, linearizedProject)
+
+      if(config.studentTooling == StudentTooling.SBT) {
+        val templateFileList: List[String] =
+          List(
+            "Man.scala",
+            "Navigation.scala",
+            "StudentCommandsPlugin.scala",
+            "StudentKeys.scala"
+          )
+        addSbtCommands(templateFileList, linearizedProject)
+        writeStudentSettingsSBT(mainRepo, linearizedProject)
+      }
+
+      writeStudentSettings(linearizedProject)
     }
     cleanUp(List(".git", "navigation.sbt"), linearizedProject)
 
     removeExercisesFromCleanMain(linearizedProject, exercises)
     addGitignoreFromMain(mainRepo, linearizedProject)
     stageFirstExercise(exercises.head, relativeCleanMainRepo, linearizedProject)
-    val cmtFileList: List[String] =
-      List(
+
+    val toolSpecificFiles = config.studentTooling match {
+      case StudentTooling.SBT => List(
         "project/MPSelection.scala",
         "project/Man.scala",
         "project/Navigation.scala",
         "project/SSettings.scala",
         "project/StudentCommandsPlugin.scala",
-        "project/StudentKeys.scala",
+        "project/StudentKeys.scala")
+
+      // TODO, figure out what to put here for the detached case
+      case _ => Nil
+    }
+
+    val cmtFileList: List[String] =
+      List(
         ".courseName",
         ".bookmark"
-      )
+      ) ++ toolSpecificFiles
+
     if (bareLinRepo) deleteCMTConfig(cmtFileList, linearizedProject)
     initializeGitRepo(linearizedProject)
     commitFirstExercise(exercises.head, linearizedProject)

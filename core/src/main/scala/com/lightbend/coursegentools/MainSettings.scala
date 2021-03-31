@@ -78,6 +78,10 @@ class MainSettings(mainRepo: File = new File("."), optConfigurationFile: Option[
   val mainBaseProjectName: String = config.getString("studentify.main-base-project-name")
   val studentifiedProjectName: String = config.getString("studentify.studentified-project-name")
 
+  val studentTooling: StudentTooling = StudentTooling.values
+    .getOrElse(config.getString("studentify.student-tooling"),
+      throw new RuntimeException("Invalid value for setting studentify.student-tooling"))
+
   object Colors {
     val promptManColor: String = validateColor("studentify.console-colors.prompt-man-color")
     val promptCourseNameColor: String = validateColor(

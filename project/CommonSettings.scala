@@ -15,7 +15,7 @@ object CompileOptions {
 object CommonSettings {
   lazy val commonSettings = Seq(
     organization := "com.github.eloots",
-    version := "2.0.0",
+    version := "2.0.0-SNAPSHOT",
     scalaVersion := Version.scalaVersion,
     scalacOptions ++= CompileOptions.compileOptions,
     unmanagedSourceDirectories in Compile := List((scalaSource in Compile).value),
